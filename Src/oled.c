@@ -104,11 +104,14 @@ int main(){
     SH1106_init();
 
     while(1){
-        SH1106_show((uint8_t*)maa);
-        Delay_ms(1000);
+        // SH1106_show((uint8_t*)maa);
+        // Delay_ms(1000);
         SH1106_show((uint8_t*)lion);
         Delay_ms(1000);
-        
+        SH1106_set_brightness(10);
+        Delay_ms(1000);
+        SH1106_set_brightness(SH1106_CONTRAST_DEFAULT);
+        Delay_ms(1000);
     }
 
     

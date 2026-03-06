@@ -69,8 +69,7 @@ void SH1106_clear(void);
 void SH1106_display_on_off(uint8_t on);
 void SH1106_set_display_line(uint8_t line);
 void SH1106_change_orientation(uint8_t horizontal,uint8_t vertical);
-// void SH1106_test_display(void);
-// void SH1106_set_brightness(uint8_t brightness);
+void SH1106_set_brightness(uint8_t brightness);
 
 void i2c_send_SH1106(uint8_t address,uint8_t *data, uint16_t size);
 void delay(uint16_t ms);

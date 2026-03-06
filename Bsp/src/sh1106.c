@@ -140,6 +140,15 @@ void SH1106_change_orientation(uint8_t horizontal,uint8_t vertical){
 }
 
 /*
+* @brief This function changes the contrast of display.
+* @param brightness: value could be 0 to 255. for normal contrast use this macro SH1106_CONTRAST_DEFAULT
+* @return None
+*/
+void SH1106_set_brightness(uint8_t brightness){
+    i2c_send_SH1106(SH1106_I2C_ADDRESS, (uint8_t[]){SH1106_COMMAND_CONTROL,SH1106_CONTRAST_COMMAND, brightness},3); 
+}
+
+/*
 * @brief This function is the user callback to i2c send. user must implement i2c send command inside this.
 * @param address: i2c slave address
 * @param data: pointer of i2c data 
