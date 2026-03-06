@@ -129,6 +129,17 @@ void SH1106_set_display_line(uint8_t line){
 }
 
 /*
+* @brief This function change the orientation of display. Enable horizontal to display a mirror image and Enable vertical to display vertically fliped image. 
+* @param horizontal: value could be ENABLE or DISABLE.  
+* @param vertical: value could be ENABLE or DISABLE. 
+* @return None
+*/
+void SH1106_change_orientation(uint8_t horizontal,uint8_t vertical){
+    i2c_send_SH1106(SH1106_I2C_ADDRESS, (uint8_t[]){SH1106_COMMAND_CONTROL,(SH1106_SEGMENT_REMAP_COMMAND | ((~horizontal) & 0x01))}, 2);
+    i2c_send_SH1106(SH1106_I2C_ADDRESS, (uint8_t[]){SH1106_COMMAND_CONTROL,(SH1106_COM_SCAN_DIR_COMMAND | (((~vertical) & 0x01) << 3))}, 2);
+}
+
+/*
 * @brief This function is the user callback to i2c send. user must implement i2c send command inside this.
 * @param address: i2c slave address
 * @param data: pointer of i2c data 

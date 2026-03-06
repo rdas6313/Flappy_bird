@@ -104,16 +104,11 @@ int main(){
     SH1106_init();
 
     while(1){
+        SH1106_show((uint8_t*)maa);
+        Delay_ms(1000);
         SH1106_show((uint8_t*)lion);
-        for(int i=0;i<64;i++){
-            SH1106_set_display_line(i);
-            Delay_ms(1000);
-        }
-
-        for(int i=63;i>=0;i--){
-            SH1106_set_display_line(i);
-            Delay_ms(1000);
-        }
+        Delay_ms(1000);
+        
     }
 
     
