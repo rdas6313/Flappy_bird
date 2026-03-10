@@ -9,6 +9,18 @@
 
 
 /* * * * * * * * * * * * * * * * *  * * * * * 
+* Macros for SH1106 Graphics Lib Internal use*
+** * * * * * * * * * * * * * * *  * * * * * */
+
+#define swap(x,y) do{int32_t tmp = x; x = y; y = tmp;}while(0)
+#define abs(x) ((x) < 0 ? -(x):(x))
+#define valid_height(x) ((x) < SH1106_HEIGHT)
+#define valid_width(x) ((x) < SH1106_WIDTH)
+#define min(a,b) ((a) < (b) ? (a) : (b))
+
+
+
+/* * * * * * * * * * * * * * * * *  * * * * * 
 *  Public functions for SH1106 Graphics Lib *
 ** * * * * * * * * * * * * * * *  * * * * * */
 

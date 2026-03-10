@@ -34,12 +34,6 @@ void gfx_draw_pixel(uint8_t x,uint8_t y, uint8_t color){
     frame_buffer[page][y] |= ((color & 0x01) << bit);
 }
 
-#define swap(x,y) do{int32_t tmp = x; x = y; y = tmp;}while(0)
-#define abs(x) ((x) < 0 ? -(x):(x))
-#define valid_height(x) ((x) < SH1106_HEIGHT)
-#define valid_width(x) ((x) < SH1106_WIDTH)
-#define min(a,b) ((a) < (b) ? (a) : (b))
-
 // implemented Bresenham's line drawing algorithm.
 void gfx_draw_line( uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, uint8_t color){
 
