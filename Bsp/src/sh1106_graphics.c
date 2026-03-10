@@ -92,7 +92,24 @@ void gfx_draw_line( uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, uint8_t colo
 
 }
 
-void gfx_draw_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h){
+void gfx_draw_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h,uint8_t color){
+
+    if(!valid_height(x) || !valid_width(y) || w == 0 || w > SH1106_WIDTH || h == 0 || h > SH1106_HEIGHT)
+        return;
+
+    uint8_t x1 = x;
+    uint8_t y1 = y + (w-1);
+
+    uint8_t x2 = x + (h-1);
+    uint8_t y2 = y;
+
+    uint8_t x3 = x + (h-1);
+    uint8_t y3 = y + (w-1);
+
+    gfx_draw_line(x,y,x1,y1,color);
+    gfx_draw_line(x,y,x2,y2,color);
+    gfx_draw_line(x2,y2,x3,y3,color);
+    gfx_draw_line(x3,y3,x1,y1,color);
 
 }
 
