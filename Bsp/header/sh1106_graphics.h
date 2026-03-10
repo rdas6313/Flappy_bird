@@ -20,6 +20,7 @@
 
 #define FONT_WIDTH 5
 #define FONT_HEIGHT 7
+#define SPACE_BETWEEN_CHAR 1 // in pixel
 
 /* * * * * * * * * * * * * * * * *  * * * * * 
 *  Public functions for SH1106 Graphics Lib *
@@ -57,7 +58,8 @@ void gfx_draw_char(uint8_t x, uint8_t y, uint8_t c,uint8_t size,uint8_t color);
 
 
 
-void gfx_draw_string(uint8_t x, uint8_t y, const char *str,const uint8_t size);
+
+void gfx_draw_string(uint8_t x, uint8_t y, const char *str,const uint8_t size,uint8_t color);
 
 
 

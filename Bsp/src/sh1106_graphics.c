@@ -349,8 +349,17 @@ void gfx_draw_char(uint8_t x, uint8_t y, uint8_t c,uint8_t size,uint8_t color){
 
 }
 
-void gfx_draw_string(uint8_t x, uint8_t y, const char *str,const uint8_t size){
-
+// next line should start >= x + (FONT_HEIGHT * size * line) + (line * space) [line starts >= 0]
+void gfx_draw_string(uint8_t x, uint8_t y, const char *str, const uint8_t size, uint8_t color){
+    
+    for(uint8_t i = 0; str[i] != '\0'; i++){
+        if(i == 0)
+            gfx_draw_char(x, y, str[i], size, color);
+        else
+            gfx_draw_char(x, y + (i * FONT_WIDTH * size) + (SPACE_BETWEEN_CHAR * i), str[i], size, color);
+        
+    }
+    
 }
 
 
