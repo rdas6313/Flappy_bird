@@ -37,7 +37,7 @@ void gfx_draw_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h,uint8_t color);
 
 
 
-void gfx_draw_fill_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h);
+void gfx_draw_fill_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h,uint8_t color);
 
 
 

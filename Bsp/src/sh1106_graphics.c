@@ -114,8 +114,16 @@ void gfx_draw_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h,uint8_t color){
 
 }
 
-void gfx_draw_fill_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h){
+void gfx_draw_fill_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h,uint8_t color){
+    if(!valid_height(x) || !valid_width(y) || w == 0 || w > SH1106_WIDTH || h == 0 || h > SH1106_HEIGHT || color > 1)
+        return;
 
+    uint8_t mx = min(x + (h - 1),SH1106_HEIGHT - 1);
+    uint8_t my = min((y + w - 1),SH1106_WIDTH - 1);
+    
+    for(uint8_t i = x; i <= mx; i++){
+        gfx_draw_line(i,y,i,my,color);
+    }
 }
 
 void gfx_draw_char(uint8_t x, uint8_t y, char c){
