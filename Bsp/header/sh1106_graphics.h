@@ -18,7 +18,8 @@
 #define valid_width(x) ((x) < SH1106_WIDTH)
 #define min(a,b) ((a) < (b) ? (a) : (b))
 
-
+#define FONT_WIDTH 5
+#define FONT_HEIGHT 7
 
 /* * * * * * * * * * * * * * * * *  * * * * * 
 *  Public functions for SH1106 Graphics Lib *
@@ -53,7 +54,7 @@ void gfx_draw_fill_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h,uint8_t color
 
 
 
-void gfx_draw_char(uint8_t x, uint8_t y, char c);
+void gfx_draw_char(uint8_t x, uint8_t y, uint8_t c,uint8_t size);
 
 
 
