@@ -1,0 +1,124 @@
+
+#include "game.h"
+
+#define MAX_PIPE 3
+#define MAX_FLOOR 2
+
+
+
+static void* scene[MAX_SCENE_ITEM];
+static uint8_t scene_len;
+
+
+
+
+static void Game_Render();
+static uint8_t Game_Detect_Collision();
+static void Game_Position_Update(uint8_t input);
+static void Game_End();
+static Floor floors[MAX_FLOOR];
+static Pipe pipes[MAX_PIPE];
+static Bird bird;
+void Game_Init(){
+    
+    gfx_init();
+
+
+    for(uint8_t i = 0; i < MAX_FLOOR; i++){
+        floor_init(&floors[i],i);
+        scene[scene_len++] = &floors[i];    
+    }
+
+    for(uint8_t i = 0; i < MAX_PIPE; i++){
+        pipe_init(&pipes[i]);
+        scene[scene_len++] = &pipes[i];
+    }
+    
+    bird_init(&bird);
+    scene[scene_len++] = &bird;
+
+
+
+}
+
+void Game_Start(){
+
+    while(1){
+        uint8_t input = Game_Input();
+        Game_Position_Update(input);
+        uint8_t collision = Game_Detect_Collision();
+        if(collision == 1){
+            Game_End();
+            break;
+        }
+        Game_Render();
+        Game_Delay(30);
+    }
+
+}
+
+__attribute__((weak))
+uint8_t Game_Input(){
+    return 0;
+}
+
+__attribute__((weak))
+void Game_Delay(uint8_t ms){
+    for(uint32_t i = 0; i < 100000;i++);
+}
+
+
+static void Game_End(){
+    while(1);
+    return;
+}
+
+
+static void Game_Render(){
+    gfx_clear_buffer();
+    for(uint8_t i = 0; i < scene_len; i++){
+        SceneType *ptype = (SceneType*)scene[i];
+        if(*ptype == FLOOR){
+            ((Floor*)scene[i])->render((Floor*)scene[i]);
+        }else if(*ptype == PIPE){
+            ((Pipe*)scene[i])->render((Pipe*)scene[i]);
+        }else{
+            ((Bird*)scene[i])->render((Bird*)scene[i]);
+        }
+    }
+    gfx_update_display();
+
+}
+
+static uint8_t Game_Detect_Collision(){
+    
+    for(uint8_t i = 0; i < scene_len; i++){
+        SceneType *ptype = (SceneType*)scene[i];
+        uint8_t collision = 0;
+        if(*ptype == PIPE){
+            collision = ((Pipe*)scene[i])->detect_collision(((Pipe*)scene[i]),&bird);
+            if(collision > 0)
+                return 1;
+        }else if(*ptype == BIRD){
+            for(uint8_t f = 0; f < MAX_FLOOR; f++){
+                collision = ((Bird*)scene[i])->detect_collision(((Bird*)scene[i]),&floors[f]);
+                if(collision > 0)
+                    return 1;
+            }
+
+        }
+    }
+    return 0;
+
+}
+
+static void Game_Position_Update(uint8_t input){
+    for(uint8_t i = 0; i < scene_len; i++){
+        SceneType *ptype = (SceneType*)scene[i];
+        if(*ptype == PIPE){
+            ((Pipe*)scene[i])->position_update((Pipe*)scene[i]);
+        }else if(*ptype == BIRD){
+            ((Bird*)scene[i])->position_update((Bird*)scene[i],input);
+        }
+    }
+}

@@ -23,8 +23,13 @@ set(linker_script_SRC ${linker_script_SRC}
 # Sources
 set(sources_SRCS ${sources_SRCS}
     
-	${CMAKE_CURRENT_SOURCE_DIR}/Src/oled.c
-	${CMAKE_CURRENT_SOURCE_DIR}/Src/images.c
+	# ${CMAKE_CURRENT_SOURCE_DIR}/Src/oled.c
+	${CMAKE_CURRENT_SOURCE_DIR}/Src/Flappy_bird/bird.c
+	${CMAKE_CURRENT_SOURCE_DIR}/Src/Flappy_bird/floor.c
+	${CMAKE_CURRENT_SOURCE_DIR}/Src/Flappy_bird/game.c
+	${CMAKE_CURRENT_SOURCE_DIR}/Src/Flappy_bird/pipe.c
+	${CMAKE_CURRENT_SOURCE_DIR}/Src/Flappy_bird/flappy_bird.c
+	${CMAKE_CURRENT_SOURCE_DIR}/Src/Flappy_bird/bitmaps.c
 	# ${CMAKE_CURRENT_SOURCE_DIR}/Src/syscall.c
 	# ${CMAKE_CURRENT_SOURCE_DIR}/Src/sysmem.c
 	${CMAKE_CURRENT_SOURCE_DIR}/Startup/startup_stm32f407vgtx.s
@@ -34,6 +39,7 @@ set(sources_SRCS ${sources_SRCS}
 set(include_c_DIRS ${include_c_DIRS}
     
 	${CMAKE_CURRENT_SOURCE_DIR}/Inc
+	${CMAKE_CURRENT_SOURCE_DIR}/Inc/Flappy_bird
 )
 set(include_cxx_DIRS ${include_cxx_DIRS}
     

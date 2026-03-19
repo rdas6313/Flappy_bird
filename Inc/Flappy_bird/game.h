@@ -1,0 +1,31 @@
+#ifndef GAME_H
+#define GAME_H
+
+#include<stdint.h>
+#include<stddef.h>
+#include "../Bsp/header/sh1106_graphics.h"
+
+#define MAX_SCENE_ITEM 8
+
+typedef enum Input{
+    IDLE,PRESSED
+} BUTTON;
+
+typedef enum SceneType{
+    FLOOR,PIPE,BIRD
+} SceneType;
+
+
+void Game_Init();
+void Game_Start();
+uint8_t Game_Input();
+void Game_Delay(uint8_t ms);
+
+
+
+
+#include "pipe.h"
+#include "floor.h"
+#include "bird.h"
+
+#endif
