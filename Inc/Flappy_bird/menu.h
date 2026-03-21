@@ -15,6 +15,8 @@
 #define MENU_BUTTON_SIZE 1
 #define MENU_BUTTON "START"
 
+#define MENU_BIRD_POS_X 28
+#define MENU_BIRD_POS_Y 255
 
 
 void Menu_render();

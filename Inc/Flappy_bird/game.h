@@ -32,5 +32,5 @@ void Game_Delay(uint16_t ms);
 #include "floor.h"
 #include "bird.h"
 #include "menu.h"
-
+#include "scoreboard.h"
 #endif

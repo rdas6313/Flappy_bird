@@ -22,7 +22,11 @@ static Floor floors[MAX_FLOOR];
 static Pipe pipes[MAX_PIPE];
 static Bird bird;
 static GameState currentGameState = GAME_MENU;
+static uint16_t score;
 
+void pipe_disappear(){
+    score += 10;
+}
 
 static void Game_Init(){
     scene_len = 0;
@@ -43,52 +47,79 @@ static void Game_Init(){
 }
 
 static void Game_AssetReload(){
-
+    uint8_t pipe = 1;
     for(uint8_t i = 0; i < scene_len; i++){
         SceneType *ptype = (SceneType*)scene[i];
         if(*ptype == FLOOR){
             ((Floor*)scene[i])->init((Floor*)scene[i],i);
         }else if(*ptype == PIPE){
-            ((Pipe*)scene[i])->init((Pipe*)scene[i],i < 1);
+            ((Pipe*)scene[i])->init((Pipe*)scene[i],pipe);
+            pipe = 0;
         }else{
             ((Bird*)scene[i])->init((Bird*)scene[i]);
         }
     }
 
+    score = 0;
+
+}
+static void init_menu_bird(Bird *mbird){
+    bird_init(mbird);
+    mbird->init(mbird);
+    mbird->x = MENU_BIRD_POS_X;
+    mbird->y = MENU_BIRD_POS_Y;
 }
 
 static void Game_Menu(){
-
-    Menu_render();
-    uint8_t input = Game_Input();
-    if(input > 0){
-        Menu_Btn_clicked();
-        currentGameState = GAME_LOOP;
-        Game_Delay(1000);
-    }
+    
+    Bird mbird;
+    init_menu_bird(&mbird);
+    uint8_t input = 0;
+    do{
+        Menu_render(&mbird);
+        input = Game_Input();
+        if(input > 0){
+            Menu_Btn_clicked(&mbird);
+            currentGameState = GAME_LOOP;
+            Game_Delay(600);
+        }
+    }while(input == 0);
 }
 
 static void Game_Over(){
-
-    currentGameState = GAME_MENU;
+    uint8_t input = 0;
+    do{
+        Scoreboard_render(score);
+        input = Game_Input();
+        if(input > 0){
+            Scoreboard_Btn_clicked(score);
+            currentGameState = GAME_MENU;
+            Game_Delay(500);
+        }
+    }while(input == 0);
+   
+   
 }
 
 static void Game_Loop(){
-    uint8_t input = Game_Input();
-    Game_Position_Update(input);
-    uint8_t collision = Game_Detect_Collision();
-    if(collision == 1){
-        Game_End();
-        return;
+    while(1){
+        uint8_t input = Game_Input();
+        Game_Position_Update(input);
+        uint8_t collision = Game_Detect_Collision();
+        if(collision == 1){
+            Game_End();
+            return;
+        }
+        Game_Render();
+        Game_Delay(10);
     }
-    Game_Render();
-    Game_Delay(10);
 }
 
 void Game_Start(){
     
     gfx_init();
     Game_Init();
+    
 
     while(1){
 

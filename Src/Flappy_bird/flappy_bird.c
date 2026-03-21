@@ -99,6 +99,8 @@ uint8_t Game_Input(){
 
 int main(){
 
+   
+
     init_Gpios();
     Init_Timer();
     I2C1_Init();

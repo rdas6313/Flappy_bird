@@ -7,6 +7,11 @@ static uint8_t current_x;
 static uint8_t current_y;
 
 
+__attribute__((weak))
+void pipe_disappear(){
+    return;
+}
+
 void pipe_render(Pipe *this){
     gfx_draw_fill_rect(this->x, this->y, this->w, this->h,1);
 }
@@ -37,6 +42,7 @@ void pipe_position_update(Pipe *this){
         this->y = SH1106_WIDTH + MIN_PIPE_WIDTH_GAP;
         this->h = rand() % (MAX_PIPE_HEIGHT_GAP - PIPE_BITMAP_HEIGHT + 1) + PIPE_BITMAP_HEIGHT;
         this->x = current_x * (SH1106_HEIGHT - this->h);
+        pipe_disappear();
     }
 }
 

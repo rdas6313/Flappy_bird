@@ -12,6 +12,7 @@
 #define MAX_PIPE_HEIGHT_GAP (SH1106_HEIGHT - BIRD_BITMAP_HEIGHT - 12)
 #define MIN_PIPE_WIDTH_GAP  (6 * PIPE_BITMAP_WIDTH)
 
+struct Bird;
 typedef struct Pipe{
     
     SceneType type;
@@ -29,5 +30,7 @@ typedef struct Pipe{
 
 
 void pipe_init(Pipe *this);
+
+void pipe_disappear();
 
 #endif

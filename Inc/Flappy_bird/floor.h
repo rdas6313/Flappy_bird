@@ -1,6 +1,7 @@
 #ifndef FLOOR_H
 #define FLOOR_H
 
+#include "game.h"
 
 #define UP_FLOOR_INITIAL_POS_X 0
 #define UP_FLOOR_INITIAL_POS_Y 0
