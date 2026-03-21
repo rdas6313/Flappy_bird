@@ -11,7 +11,9 @@ static uint8_t scene_len;
 
 
 
-
+static void Game_Menu();
+static void Game_Over();
+static void Game_Loop();
 static void Game_Render();
 static uint8_t Game_Detect_Collision();
 static void Game_Position_Update(uint8_t input);
@@ -19,6 +21,9 @@ static void Game_End();
 static Floor floors[MAX_FLOOR];
 static Pipe pipes[MAX_PIPE];
 static Bird bird;
+static GameState currentGameState = GAME_MENU;
+
+
 void Game_Init(){
     
     gfx_init();
@@ -41,18 +46,50 @@ void Game_Init(){
 
 }
 
-void Game_Start(){
+static void Game_Menu(){
 
+    Menu_render();
+    uint8_t input = Game_Input();
+    if(input > 0){
+        Menu_Btn_clicked();
+        currentGameState = GAME_LOOP;
+        Game_Delay(1000);
+    }
+}
+
+static void Game_Over(){
+
+    currentGameState = GAME_MENU;
+}
+
+static void Game_Loop(){
+    uint8_t input = Game_Input();
+    Game_Position_Update(input);
+    uint8_t collision = Game_Detect_Collision();
+    if(collision == 1){
+        Game_End();
+        return;
+    }
+    Game_Render();
+    Game_Delay(30);
+}
+
+void Game_Start(){
+    
     while(1){
-        uint8_t input = Game_Input();
-        Game_Position_Update(input);
-        uint8_t collision = Game_Detect_Collision();
-        if(collision == 1){
-            Game_End();
-            break;
+
+        switch(currentGameState){
+            case GAME_MENU:
+                Game_Menu();
+                break;
+            case GAME_LOOP:
+                Game_Loop();
+                break;
+            case GAME_OVER:
+                Game_Over();
+                break;
         }
-        Game_Render();
-        Game_Delay(30);
+        
     }
 
 }
@@ -69,8 +106,7 @@ void Game_Delay(uint8_t ms){
 
 
 static void Game_End(){
-    while(1);
-    return;
+    currentGameState = GAME_OVER;
 }
 
 

@@ -15,6 +15,10 @@ typedef enum SceneType{
     FLOOR,PIPE,BIRD
 } SceneType;
 
+typedef enum GameState{
+    GAME_MENU,GAME_LOOP,GAME_OVER
+} GameState;
+
 
 void Game_Init();
 void Game_Start();
@@ -27,5 +31,6 @@ void Game_Delay(uint8_t ms);
 #include "pipe.h"
 #include "floor.h"
 #include "bird.h"
+#include "menu.h"
 
 #endif
