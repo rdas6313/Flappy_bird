@@ -22,7 +22,7 @@ set(linker_script_SRC ${linker_script_SRC}
 
 # Sources
 set(sources_SRCS ${sources_SRCS}
-    
+	${CMAKE_CURRENT_SOURCE_DIR}/Src/interrupt_handlers.c
 	${CMAKE_CURRENT_SOURCE_DIR}/Src/Flappy_bird/bird.c
 	${CMAKE_CURRENT_SOURCE_DIR}/Src/Flappy_bird/floor.c
 	${CMAKE_CURRENT_SOURCE_DIR}/Src/Flappy_bird/game.c

@@ -4,6 +4,10 @@
 /**
   * @brief This function handles Non maskable interrupt.
   */
+  
+  void BtnClickedCallback();
+
+
   void NMI_Handler(void)
   {
     
@@ -68,5 +72,9 @@
     {
      
     }
+  }
+
+  void EXTI0_IRQHandler(void){
+    BtnClickedCallback();
   }
   

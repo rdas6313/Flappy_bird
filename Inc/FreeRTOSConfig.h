@@ -32,9 +32,8 @@
  /******************************************************************************/
  /* Hardware description related definitions. **********************************/
  /******************************************************************************/
- 
- extern uint32_t SystemCoreClock;          
- #define configCPU_CLOCK_HZ SystemCoreClock
+         
+ #define configCPU_CLOCK_HZ 16000000U
  
  /******************************************************************************/
  /* Scheduling behaviour related definitions. **********************************/
@@ -161,7 +160,7 @@
 
 
 
-#include "SEGGER_SYSVIEW_FreeRTOS.h"
+// #include "SEGGER_SYSVIEW_FreeRTOS.h"
 
 
  

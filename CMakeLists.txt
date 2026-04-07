@@ -126,8 +126,8 @@ target_include_directories(freertos_config SYSTEM INTERFACE
     ${CMAKE_SOURCE_DIR}/Inc
 )
 
-# SEGGER first (creates segger + segger_header)
-add_subdirectory(Thirdparty/Segger)
+# # SEGGER first (creates segger + segger_header)
+# add_subdirectory(Thirdparty/Segger)
 
 # FreeRTOS second
 add_subdirectory(Thirdparty/FreeRtos)
@@ -144,19 +144,19 @@ target_compile_options(freertos_kernel_port PRIVATE ${FREERTOS_COMPILE_OPTS})
 
 
 # FreeRTOS needs SEGGER headers
-target_link_libraries(freertos_kernel PRIVATE segger_header)
+# target_link_libraries(freertos_kernel PRIVATE segger_header)
 
-target_link_libraries(freertos_kernel_port PRIVATE segger_header)
+# target_link_libraries(freertos_kernel_port PRIVATE segger_header)
 
 target_link_libraries(freertos_kernel PRIVATE freertos_config)
 
-target_link_libraries(segger PRIVATE freertos_kernel)
+# target_link_libraries(segger PRIVATE freertos_kernel)
 
-target_compile_definitions(segger PRIVATE STM32F407xx)
-target_include_directories(segger PRIVATE ${CMSIS_HEADER})
+# target_compile_definitions(segger PRIVATE STM32F407xx)
+# target_include_directories(segger PRIVATE ${CMSIS_HEADER})
 
-# SEGGER needs FreeRTOS config
-target_link_libraries(segger PRIVATE freertos_config)
+# # SEGGER needs FreeRTOS config
+# target_link_libraries(segger PRIVATE freertos_config)
 
 # Link directories setup
 # Must be before executable is added
@@ -174,6 +174,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     $<$<COMPILE_LANGUAGE:C>: ${include_c_DIRS}>
     $<$<COMPILE_LANGUAGE:CXX>: ${include_cxx_DIRS}>
     $<$<COMPILE_LANGUAGE:ASM>: ${include_asm_DIRS}>
+    
 )
 
 # Add project symbols (macros)

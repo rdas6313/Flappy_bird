@@ -62,6 +62,7 @@
 #define GPIOJ_BASEADDR (AHB1PERIPH_BASEADDR + 0x2400)
 #define GPIOK_BASEADDR (AHB1PERIPH_BASEADDR + 0x2800)
 #define RCC_BASEADDR (AHB1PERIPH_BASEADDR + 0x3800)
+#define FLASH_INTERFACE_BASEADDR (AHB1PERIPH_BASEADDR + 0x3C00)
 
 // APB1 peripherals Base address
 
@@ -70,6 +71,7 @@
 #define I2C3_BASEADDR (APB1PERIPH_BASEADDR + 0x5C00)
 #define TIM6_BASEADDR (APB1PERIPH_BASEADDR + 0x1000)
 #define TIM7_BASEADDR (APB1PERIPH_BASEADDR + 0x1400)
+#define PWR_BASEADDR  (APB1PERIPH_BASEADDR + 0x7000)
 
 // SPI peripherals Base address
 
@@ -463,6 +465,25 @@ typedef struct{
 #define TIM6 ((BTIM_RegDef_t *)TIM6_BASEADDR)
 #define TIM7 ((BTIM_RegDef_t *)TIM7_BASEADDR)
 
+
+typedef struct{
+    volatile uint32_t FLASH_ACR;      // Flash access control register
+    volatile uint32_t FLASH_KEYR;     // Flash key register
+    volatile uint32_t FLASH_OPTKEYR;  // Flash option key register
+    volatile uint32_t FLASH_SR;       // Flash status register
+    volatile uint32_t FLASH_CR;       // Flash control register
+    volatile uint32_t FLASH_OPTCR;    // Flash option control register
+} FLASH_RegDef_t;
+
+#define FLASH ((FLASH_RegDef_t *)FLASH_INTERFACE_BASEADDR)
+
+
+typedef struct{
+    volatile uint32_t CR;   // Power control register
+    volatile uint32_t CSR;  // Power control/status register
+}PWR_RegDef_t;
+
+#define PWR ((PWR_RegDef_t *)PWR_BASEADDR)
 
 
 #endif

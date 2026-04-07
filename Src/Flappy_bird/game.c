@@ -9,6 +9,8 @@
 static void* scene[MAX_SCENE_ITEM];
 static uint8_t scene_len;
 
+uint8_t current_bird_jump;
+uint8_t current_game_speed;
 
 
 static void Game_Menu();
@@ -102,16 +104,18 @@ static void Game_Over(){
 }
 
 static void Game_Loop(){
+    Game_Timer_Start();
     while(1){
         uint8_t input = Game_Input();
         Game_Position_Update(input);
         uint8_t collision = Game_Detect_Collision();
         if(collision == 1){
+            Game_Timer_Stop();
             Game_End();
             return;
         }
         Game_Render();
-        Game_Delay(10);
+        Game_Delay(current_game_speed);
     }
 }
 

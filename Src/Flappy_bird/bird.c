@@ -20,7 +20,7 @@ void bird_render(Bird *this){
 
 void bird_position_update(Bird *this,uint8_t input){
     if(input)
-        this->x -= 1;
+        this->x -= current_bird_jump;
     else
         this->x += 1;
 }
